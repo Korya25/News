@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_cloud_app/widget/custom_app_bar.dart';
+import 'package:news_cloud_app/widget/news_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,6 +12,12 @@ class HomeScreen extends StatelessWidget {
       appBar: CustomAppBar(),
 
       // Body
+      body: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return NewsCard();
+        },
+      ),
     );
   }
 }
