@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+class CategoryList extends StatelessWidget {
+  const CategoryList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    const List<String> categories = [
+      'General',
+      'Technology',
+      'Sports',
+      'Entertainment',
+      'Science',
+    ];
+
+    return SliverToBoxAdapter(
+      child: SizedBox(
+        height: 50,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: FilterChip(
+                label: Text(categories[index]),
+                onSelected: (_) {},
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
