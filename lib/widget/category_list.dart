@@ -15,22 +15,20 @@ class CategoryList extends StatelessWidget {
       'Science',
     ];
 
-    return SliverToBoxAdapter(
-      child: SizedBox(
-        height: 50,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: FilterChip(
-                label: Text(categories[index]),
-                onSelected: (_) {},
-              ),
-            );
-          },
-        ),
+    return SizedBox(
+      height: 50,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: FilterChip(
+              label: Text(categories[index]),
+              onSelected: (_) {},
+            ),
+          );
+        },
       ),
     );
   }

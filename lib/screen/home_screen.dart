@@ -9,21 +9,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // App Bar
-      appBar: CustomAppBar(),
+        // App Bar
+        appBar: CustomAppBar(),
 
-      // Body
-      body: CustomScrollView(
-        slivers: [
-          CategoryList(),
-          SliverList.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return NewsCard();
-            },
-          ),
-        ],
-      ),
-    );
+        // Body
+        body: Column(
+          children: [
+            CategoryList(),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return NewsCard();
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
