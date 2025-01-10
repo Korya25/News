@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:news_cloud_app/constant/app_text_style.dart';
+import 'package:news_cloud_app/cubit/theme_cubit.dart';
 import 'package:news_cloud_app/screen/search_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -36,8 +38,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () {
             // Add theme mode functionality
+            context.read<ThemeBloc>().toggleTheme();
           },
-          icon: const Icon(LucideIcons.moon),
+          icon: BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, state) {
+              if (state.isDark) {
+                return Icon(LucideIcons.moon);
+              } else {
+                return Icon(LucideIcons.sun);
+              }
+            },
+          ),
         ),
         IconButton(
           onPressed: () {
