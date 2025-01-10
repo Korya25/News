@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_cloud_app/model/news.dart';
 
 class NewsCard extends StatelessWidget {
-  const NewsCard({super.key});
-
+  const NewsCard({super.key, required this.news});
+  final News news;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,7 +15,7 @@ class NewsCard extends StatelessWidget {
         children: [
           // Image
           Image.network(
-            'https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg',
+            news.imageUrl,
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -27,13 +28,13 @@ class NewsCard extends StatelessWidget {
               children: [
                 // Title
                 Text(
-                  'The World Gold Council is the authority on Gold. Explore unique gold market and industry research',
+                  news.title,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 4),
                 // SubTitle
                 Text(
-                  'The World Gold Council is the authority on Gold. Explore unique gold market and industry research',
+                  news.subtitle,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 8),
@@ -41,7 +42,7 @@ class NewsCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     // Catogray
-                    Chip(label: Text('general')),
+                    Chip(label: Text(news.category)),
                     // Heart
                     IconButton(
                       icon: Icon(

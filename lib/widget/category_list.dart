@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_cloud_app/cubit/news_bloc.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({
@@ -23,9 +25,17 @@ class CategoryList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(right: 8),
-            child: FilterChip(
-              label: Text(categories[index]),
-              onSelected: (_) {},
+            child: BlocBuilder<NewsBloc, NewsState>(
+              builder: (context, state) {
+                final selected = state.selectedCategory == categories[index];
+                return FilterChip(
+                  selected: selected,
+                  label: Text(categories[index]),
+                  onSelected: (_) {
+                    context.read<NewsBloc>().selectCategory(categories[index]);
+                  },
+                );
+              },
             ),
           );
         },
