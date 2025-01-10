@@ -11,34 +11,33 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // App Bar
-        appBar: CustomAppBar(),
-
-        // Body
-        body: Column(
-          children: [
-            CategoryList(),
-            Expanded(
-              child: BlocBuilder<NewsBloc, NewsState>(
-                builder: (context, state) {
-                  if (state.isLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return RefreshIndicator(
-                    onRefresh: () {
-                      return context.read<NewsBloc>().fetchNews();
+      appBar: CustomAppBar(),
+      body: Column(
+        children: [
+          CategoryList(),
+          Expanded(
+            child: BlocBuilder<NewsBloc, NewsState>(
+              builder: (context, state) {
+                if (state.isLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                if (state.error != null) {
+                  return Center(child: Text('Error: ${state.error}'));
+                }
+                return RefreshIndicator(
+                  onRefresh: () => context.read<NewsBloc>().fetchNews(),
+                  child: ListView.builder(
+                    itemCount: state.news.length,
+                    itemBuilder: (context, index) {
+                      return NewsCard(news: state.news[index]);
                     },
-                    child: ListView.builder(
-                      itemCount: state.news.length,
-                      itemBuilder: (context, index) {
-                        return NewsCard(news: state.news[index]);
-                      },
-                    ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

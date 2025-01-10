@@ -10,7 +10,6 @@ class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const List<String> categories = [
-      'General',
       'Technology',
       'Sports',
       'Entertainment',

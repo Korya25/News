@@ -65,7 +65,7 @@ class NewsBloc extends Cubit<NewsState> {
     }
   }
 
-  void selectCategory(String category) {
+  Future<void> selectCategory(String category) async {
     if (category == state.selectedCategory) {
       return;
     }
